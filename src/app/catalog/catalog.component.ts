@@ -104,26 +104,33 @@ export class CatalogComponent {
     }
   ]
 
-  get productsPromo() {
+  produitsAchetes: produit[] = [];
+
+  //produits en promotion
+  produitsEnPromo(): produit[] {
     return this.produits.filter(produit => produit.isPromo);
   }
 
+  // cacul du prix de après promotion
   promoPrice(produit: produit): number {
     const discount = (produit.price * produit.promoValue!) / 100;
     return produit.price - discount;
   }
 
+  // calcul du nombre de jour restant
   dayRemaining(produit: produit): number | null{
-		
 		const promotionEndDate =produit.promotionEndDate;
     const difference : number =  promotionEndDate!.getTime() - Date.now() ;
     const daysRemaining : number = Math.ceil(difference / (1000 * 3600 * 24));
 
     return daysRemaining;
- 
 	}
-  
-  testClick() : void {
-    alert("Hello :)");
+
+  // déplace les produits dans la table des produits acheté au clic
+  acheterProduit(index: number) {
+    const produitAchete = this.produits[index];
+    this.produitsAchetes.push(produitAchete);
+    this.produits.splice(index, 1);
   }
+
 }
