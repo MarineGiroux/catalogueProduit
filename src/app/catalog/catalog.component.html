@@ -8,13 +8,13 @@
           @for(produit of produits; track $index){
               <div [ngStyle]="{'background-image': produit.img ? 'url(' + produit.img + ')' : ''}" [ngClass]={produit}>
                 <h1>{{produit.name}}</h1>
-                <h2 [ngStyle]="{'text-decoration': produit.isPromo? 'line-through': ''}">{{produit.price}} €</h2>
-                @if(produit.isPromo){
-                  <p [ngClass]="{'superPromo' : produit.promoValue! > 20}">
-                    Promotion : {{produit.promoValue}}%
+                <h2 [ngStyle]="{'text-decoration': produit.isDiscount? 'line-through': ''}">{{produit.price | currency:'EUR'}}</h2>
+                @if(produit.isDiscount){
+                  <p [ngClass]="{'superPromo' : produit.isDiscount.discountValue! > 20}">
+                    Promotion : {{produit.isDiscount.discountValue}}%
                   </p>
-                  <h2 [ngClass]="{'superPromo' : produit.promoValue! > 20}">
-                    Soit : {{promoPrice(produit)}} €
+                  <h2 [ngClass]="{'superPromo' : produit.isDiscount.discountValue! > 20}">
+                    Soit : {{promoPrice(produit)  | currency:'EUR'}}
                   </h2>
                   <p>Plus que {{dayRemaining(produit)}} jours !</p>
                 }
@@ -39,10 +39,10 @@
     @for(produit of produitsAchetes; track $index){
       <div [ngStyle]="{'background-image': produit.img ? 'url(' + produit.img + ')' : ''}" [ngClass]={produit}>
         <h1>{{produit.name}}</h1>
-        <h2 [ngStyle]="{'text-decoration': produit.isPromo? 'line-through': ''}">{{produit.price}} €</h2>
-        @if(produit.isPromo){
-          <h2 [ngClass]="{'superPromo' : produit.promoValue! > 20}">
-            {{promoPrice(produit)}} € seulement !
+        <h2 [ngStyle]="{'text-decoration': produit.isDiscount? 'line-through': ''}">{{produit.price  | currency:'EUR'}}</h2>
+        @if(produit.isDiscount){
+          <h2 [ngClass]="{'superPromo' : produit.isDiscount.discountValue! > 20}">
+            {{promoPrice(produit)  | currency:'EUR'}} seulement !
           </h2>
         }
       </div>
