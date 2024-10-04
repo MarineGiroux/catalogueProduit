@@ -2,26 +2,25 @@
 
 <div [ngClass]="{'general' : produits}">
   @if(produits.length > 0){
-      @if(produits.length === 0){
-          <h1 [ngClass]="{'promo' : produits}">Les promos reviennent bientôt ma loutre 🦦</h1>
-      } 
-          @for(produit of produits; track $index){
-              <div [ngStyle]="{'background-image': produit.img ? 'url(' + produit.img + ')' : ''}" [ngClass]={produit}>
-                <h1>{{produit.name}}</h1>
-                <h2 [ngStyle]="{'text-decoration': produit.isDiscount? 'line-through': ''}">{{produit.price | currency:'EUR'}}</h2>
-                @if(produit.isDiscount){
-                  <p [ngClass]="{'superPromo' : produit.isDiscount.discountValue! > 20}">
-                    Promotion : {{produit.isDiscount.discountValue}}%
-                  </p>
-                  <h2 [ngClass]="{'superPromo' : produit.isDiscount.discountValue! > 20}">
-                    Soit : {{promoPrice(produit)  | currency:'EUR'}}
-                  </h2>
-                  <p>Plus que {{dayRemaining(produit)}} jours !</p>
-                }
-                <button (click)="acheterProduit($index)" [ngClass]="{'button' : produits}">J'achète !</button>
-          
-              </div>
-            }
+    @if(produitsEnPromo().length === 0) {
+      <h1 [ngClass]="{'promo' : produits}">Les promos reviennent bientôt ma loutre 🦦</h1>
+    }
+    @for(produit of produits; track produit.id){
+        <div [ngStyle]="{'background-image': produit.img ? 'url(' + produit.img + ')' : ''}" [ngClass]={produit}>
+          <h1>{{produit.name}}</h1>
+          <h2 [ngStyle]="{'text-decoration': produit.isDiscount? 'line-through': ''}">{{produit.price | currency:'EUR'}}</h2>
+          @if(produit.isDiscount){
+            <p [ngClass]="{'super-promo' : produit.isDiscount.discountValue! > 20}">
+              Promotion : {{produit.isDiscount.discountValue}}%
+            </p>
+            <h2 [ngClass]="{'super-promo' : produit.isDiscount.discountValue! > 20}">
+              Soit : {{promoPrice(produit)  | currency:'EUR'}}
+            </h2>
+            <p>Plus que {{dayRemaining(produit)}} jours !</p>
+          }
+          <button (click)="acheterProduit($index)" [ngClass]="{'button' : produits}">J'achète !</button>
+        </div>
+      }
       
 
   }@else {
@@ -32,16 +31,13 @@
 <h1>vous avez acheté :</h1>
 
 <div [ngClass]="{'general' : produits}">
-
-
-
   @if(produitsAchetes.length > 0){
-    @for(produit of produitsAchetes; track $index){
+    @for(produit of produitsAchetes; track produit.id){
       <div [ngStyle]="{'background-image': produit.img ? 'url(' + produit.img + ')' : ''}" [ngClass]={produit}>
         <h1>{{produit.name}}</h1>
         <h2 [ngStyle]="{'text-decoration': produit.isDiscount? 'line-through': ''}">{{produit.price  | currency:'EUR'}}</h2>
         @if(produit.isDiscount){
-          <h2 [ngClass]="{'superPromo' : produit.isDiscount.discountValue! > 20}">
+          <h2 [ngClass]="{'super-promo' : produit.isDiscount.discountValue! > 20}">
             {{promoPrice(produit)  | currency:'EUR'}} seulement !
           </h2>
         }

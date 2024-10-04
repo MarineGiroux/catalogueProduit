@@ -1,0 +1,60 @@
+<section>
+  <button [routerLink]="['/']">Accueil</button>
+  <div class="mb-3">
+    <label class="form-label">
+      Username :
+      <input class="form-control" type="text" [formControl]="username" />
+    </label>
+  </div>
+
+  <div class="mb-3">
+    <label class="form-label">
+      Email :
+      <input class="form-control" type="email" [formControl]="email" />
+    </label>
+  </div>
+
+  <div class="mb-3">
+    <label class="form-label">
+      Mot de passe :
+      <input class="form-control" type="password" [formControl]="password" />
+    </label>
+  </div>
+
+  <div [formGroup]="adress">
+    <div class="mb-3">
+      <label class="form-label">
+        Rue :
+        <input class="form-control" type="text" formControlName="street" />
+      </label>
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">
+        Code postal :
+        <input class="form-control" type="text" formControlName="zipcode" />
+      </label>
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">
+        Ville :
+        <input class="form-control" type="text" formControlName="city" />
+      </label>
+    </div>
+  </div>
+    <button (click)="onSubmit()">Inscription</button>
+
+
+  @if(submitted){
+  <div>
+    <h2>Utilisateur inscrit :</h2>
+    <p>Nom d'utilisateur : {{ username.value }}</p>
+    <p>Email : {{ email.value }}</p>
+    <p>Mot de passe : {{ password.value }}</p>
+    <p>Rue : {{ adress.value.street }}</p>
+    <p>Code postal : {{ adress.value.zipcode }}</p>
+    <p>Ville : {{ adress.value.city }}</p>
+  </div>
+  }
+</section>
