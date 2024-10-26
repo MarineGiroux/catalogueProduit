@@ -1,3 +1,4 @@
+import { AbstractControl, ValidationErrors } from "@angular/forms";
 import { AdressUser } from "./adress-user.model";
 
 export class UserInscription {

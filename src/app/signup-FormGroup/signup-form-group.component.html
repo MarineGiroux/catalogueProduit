@@ -6,14 +6,34 @@
     <label class="form-label">
       Username :
       <input class="form-control" type="text" formControlName="username" />
+      @if (userForm.controls['username'].errors &&
+      !userForm.controls['username'].pristine){
+      <div [hidden]="!userForm.controls['username'].errors['required']">
+        username is required.
+      </div>
+      <div [hidden]="!userForm.controls['username'].invalid">
+        username is invalid.
+      </div>
+      }
     </label>
   </div>
-
   <div formGroupName="credentials">
     <div class="mb-3">
       <label class="form-label">
         Email :
         <input class="form-control" type="email" formControlName="email" />
+        @if (userForm.get('credentials.email')?.errors &&
+        !userForm.get('credentials.email')?.pristine){
+        <div
+          [hidden]="!userForm.get('credentials.email')?.errors?.['required']"
+        >
+          email is required.
+        </div>
+        <div [hidden]="!userForm.get('credentials.email')?.invalid">
+          email is invalid:
+          {{ userForm.get("credentials.email")?.errors?.['email'].rules }}
+        </div>
+        }
       </label>
     </div>
 
@@ -25,6 +45,18 @@
           type="password"
           formControlName="password"
         />
+        @if (userForm.get('credentials.password')?.errors &&
+        !userForm.get('credentials.password')?.pristine){
+        <div
+          [hidden]="!userForm.get('credentials.password')?.errors?.['required']"
+        >
+          password is required.
+        </div>
+        <div [hidden]="!userForm.get('credentials.password')?.invalid">
+          password is invalid:
+          {{ userForm.get("credentials.password")?.errors?.['password'].rules }}
+        </div>
+        }
       </label>
     </div>
   </div>
@@ -55,15 +87,14 @@
   <button type="submit" [disabled]="!userForm.valid">Inscription</button>
 
   @if(submitted){
-    <div>
-      <h2>Utilisateur inscrit :</h2>
-      <p>Nom d'utilisateur : {{ userForm.value.username }}</p>
-      <p>Email : {{ userForm.value.credentials?.email}}</p>
-      <p>Mot de passe : {{ userForm.value.credentials?.password }}</p>
-      <p>Rue : {{ userForm.value.address?.street }}</p>
-      <p>Code postal : {{ userForm.value.address?.zipCode }}</p>
-      <p>Ville : {{ userForm.value.address?.city }}</p>
-    </div>
+  <div>
+    <h2>Utilisateur inscrit :</h2>
+    <p>Nom d'utilisateur : {{ userForm.value.username }}</p>
+    <p>Email : {{ userForm.value.credentials?.email }}</p>
+    <p>Mot de passe : {{ userForm.value.credentials?.password }}</p>
+    <p>Rue : {{ userForm.value.address?.street }}</p>
+    <p>Code postal : {{ userForm.value.address?.zipCode }}</p>
+    <p>Ville : {{ userForm.value.address?.city }}</p>
+  </div>
   }
-
 </form>
