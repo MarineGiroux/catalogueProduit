@@ -1,0 +1,69 @@
+<h1>Inscription FormGroup</h1>
+
+<form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+  <button [routerLink]="['/']">Accueil</button>
+  <div class="mb-3">
+    <label class="form-label">
+      Username :
+      <input class="form-control" type="text" formControlName="username" />
+    </label>
+  </div>
+
+  <div formGroupName="credentials">
+    <div class="mb-3">
+      <label class="form-label">
+        Email :
+        <input class="form-control" type="email" formControlName="email" />
+      </label>
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">
+        Mot de passe :
+        <input
+          class="form-control"
+          type="password"
+          formControlName="password"
+        />
+      </label>
+    </div>
+  </div>
+
+  <div formGroupName="address">
+    <div class="mb-3">
+      <label class="form-label">
+        Rue :
+        <input class="form-control" type="text" formControlName="street" />
+      </label>
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">
+        Code postal :
+        <input class="form-control" type="text" formControlName="zipCode" />
+      </label>
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">
+        Ville :
+        <input class="form-control" type="text" formControlName="city" />
+      </label>
+    </div>
+  </div>
+
+  <button type="submit" [disabled]="!userForm.valid">Inscription</button>
+
+  @if(submitted){
+    <div>
+      <h2>Utilisateur inscrit :</h2>
+      <p>Nom d'utilisateur : {{ userForm.value.username }}</p>
+      <p>Email : {{ userForm.value.credentials?.email}}</p>
+      <p>Mot de passe : {{ userForm.value.credentials?.password }}</p>
+      <p>Rue : {{ userForm.value.address?.street }}</p>
+      <p>Code postal : {{ userForm.value.address?.zipCode }}</p>
+      <p>Ville : {{ userForm.value.address?.city }}</p>
+    </div>
+  }
+
+</form>

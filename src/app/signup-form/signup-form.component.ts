@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { UserInscription } from '../models/user-inscription.model';
-import { AdressUser } from '../models/adress-user.model';
 
 @Component({
   selector: 'app-signup-form',

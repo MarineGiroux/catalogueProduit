@@ -10,7 +10,6 @@
     align-items: center;
     font-size: 25px;
     border-radius: 5px;
-    box-shadow: 6px 6px 25px rgba(0, 0, 0, 0.5);
 }
 
 .produit h1, h2, p {
@@ -21,10 +20,6 @@
     padding: 5px;
     margin: 5px;
     background-color: transparent;
-}
-
-.produit:hover {
-    transform: scale(0.96);
 }
 
 .super-promo {
@@ -55,7 +50,7 @@
 
 
 .button {
-    background-color: #e7d63d;
+  background-color: #f1e78a;
     border: 0 solid #E5E7EB;
     box-sizing: border-box;
     color: #000000;
@@ -66,14 +61,15 @@
     justify-content: center;
     position: absolute;
     bottom: 0; 
-    left: 50%;
+    left: 40%;
     text-align: center;
-    width: 50%;
+    width: 200px;
     cursor: pointer;
     transform: rotate(-3deg);
     user-select: none;
     -webkit-user-select: none;
     touch-action: manipulation;
+    box-shadow: 6px 6px 25px rgba(0, 0, 0, 0.5);
   }
 
 .button:after {
@@ -86,7 +82,9 @@
   height: calc(100% - 1px);
 }
 
-
+.button:hover {
+  transform: scale(0.96);
+}
 
 @media (min-width: 768px) {
   .button {

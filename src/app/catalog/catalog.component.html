@@ -6,8 +6,8 @@
       <h1 [ngClass]="{'promo' : produits}">Les promos reviennent bientôt ma loutre 🦦</h1>
     }
     @for(produit of produits; track produit.id){
-        <div [ngStyle]="{'background-image': produit.img ? 'url(' + produit.img + ')' : ''}" [ngClass]={produit}>
-          <h1>{{produit.name}}</h1>
+      <div [ngStyle]="{'background-image': produit.img ? 'url(' + produit.img + ')' : ''}" [ngClass]={produit}>
+        <h1>{{produit.name}}</h1>
           <h2 [ngStyle]="{'text-decoration': produit.isDiscount? 'line-through': ''}">{{produit.price | currency:'EUR'}}</h2>
           @if(produit.isDiscount){
             <p [ngClass]="{'super-promo' : produit.isDiscount.discountValue! > 20}">
