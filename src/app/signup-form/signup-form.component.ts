@@ -28,13 +28,15 @@ export class SignupFormComponent {
 
   onSubmit() {
     
-    this.submitted = true;
-    this.user.userName = this.username.value as string;
-    this.user.email = this.email.value as string;
-    this.user.password = this.password.value as string;
-    this.user.adress.street = this.adress.get("street")!.value as string;
-    this.user.adress.zipcode = this.adress.get("zipcode")!.value as string;
-    this.user.adress.city = this.adress.get("city")!.value as string;
+    this.user = new UserInscription(
+      this.username.value as string,
+      this.email.value as string,
+      this.password.value as string,
+      new AdressUser(
+        this.adress.get("street")!.value as string,
+        this.adress.get("zipcode")!.value as string,
+        this.adress.get("city")!.value as string
+      ));
     console.log(this.username);
     
   }
